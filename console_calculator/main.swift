@@ -1,36 +1,49 @@
 print("Добро пожаловать в программу калькулятор")
 
-print("Выберите операцию: +, -, *  или /")
-let operation = readLine() ?? ""
+func getDataForUser(description: String) -> String {
+    print(description)
+    return readLine() ?? ""
+}
 
-print("Введите первое число:")
-let firstNunber = readLine() ?? ""
+let operation = getDataForUser(description: "Выберите операцию: +, -, *  или /" )
+let firstNunber = getDataForUser(description: "Введите первое число:" )
+let secondNunber = getDataForUser(description: "Введите второе число:" )
 
-print("Введите второе число:")
-let secondNunber = readLine() ?? ""
+func showResult(_ result: Int) {
+    let result = String(result)
+    let description = "Результат :"
+    print(description + " " + result)
+}
 
 print("Идет вычисление примера: ", firstNunber + " " + operation + " " + secondNunber)
 
+func calculate (operation: String, firstNunber: Int, secondNunber: Int ) {
+    switch operation {
+    case "+": showResult(firstNunber + secondNunber)
+    case "-": showResult(firstNunber - secondNunber)
+    case "*": showResult(firstNunber * secondNunber)
+    case "/":
+        if secondNunber != 0 {
+            showResult(firstNunber / secondNunber)
+        } else {
+            print("Делить на 0 нельзя")
+        }
+        
+    default: print("Вы ввели неверную операцию")
+    }
+}
+
 if let firstNunber = Int(firstNunber) {
    if let secondNunber = Int(secondNunber) {
-       switch operation {
-       case "+": print("Результат: " + String( firstNunber + secondNunber))
-       case "-": print("Результат: " + String( firstNunber - secondNunber))
-       case "*": print("Результат: " + String( firstNunber * secondNunber))
-       case "/":
-           if secondNunber != 0 {
-               print("Результат: " + String( firstNunber / secondNunber))
-           } else {
-               print("Делить на 0 нельзя")
-           }
-           
-       default: print("Вы ввели неверную операцию")
-       }
+       calculate(operation: operation, firstNunber: firstNunber, secondNunber: secondNunber)
     } else {
-        print("Вы ввели неверное первое число")
+        print("Вы ввели неверное второе число")
     }
 } else {
     print("Вы ввели неверное первое число")
+
 }
+
+
 
 
